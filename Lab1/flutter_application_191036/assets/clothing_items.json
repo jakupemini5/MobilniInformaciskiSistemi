@@ -1,0 +1,45 @@
+[
+    {
+      "name": "Red Jacket",
+      "price": 10,
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1675186049366-64a655f8f537?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 2",
+      "price": 20,
+      "imageUrl": "https://picsum.photos/seed/b/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 3",
+      "price": 30,
+      "imageUrl": "https://picsum.photos/seed/c/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 4",
+      "price": 10,
+      "imageUrl": "https://picsum.photos/seed/d/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 5",
+      "price": 10,
+      "imageUrl": "https://picsum.photos/seed/e/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 6",
+      "price": 10,
+      "imageUrl": "https://picsum.photos/seed/f/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    },
+    {
+      "name": "Item 7",
+      "price": 10,
+      "imageUrl": "https://picsum.photos/seed/g/400/300",
+      "description": "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam."
+    }
+]
+  

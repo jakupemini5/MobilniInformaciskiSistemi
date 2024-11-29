@@ -5,12 +5,14 @@ class ClothingItemCard extends StatelessWidget {
   final int price;
   final String name;
   final String imageUrl;
+  final String description;
 
   const ClothingItemCard({
     super.key,
     required this.price,
     required this.name,
     required this.imageUrl,
+    required this.description
   });
 
   @override
@@ -25,6 +27,7 @@ class ClothingItemCard extends StatelessWidget {
               name: name,
               imageUrl: imageUrl,
               price: price,
+              description: description,
             ),
           ),
         );

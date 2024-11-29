@@ -5,12 +5,14 @@ class ClothingItemDetails extends StatelessWidget {
   final String name;
   final int price;
   final String imageUrl;
+  final String description;
 
   const ClothingItemDetails({
     super.key,
     required this.name,
     required this.price,
     required this.imageUrl,
+    required this.description
   });
 
   @override
@@ -75,9 +77,9 @@ class ClothingItemDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Item Description:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac tortor enim. Sed lacinia molestie diam, eu sollicitudin odio venenatis id. Suspendisse eget venenatis risus, in porttitor eros. Nam at velit quam. Pellentesque iaculis, lorem ac placerat pulvinar, diam lacus ultrices nunc, et mollis ligula ligula nec lorem. Maecenas vestibulum, arcu ut eleifend interdum, lorem purus consectetur ipsum, non bibendum nunc lacus dapibus erat. Nulla a vehicula diam. In libero lacus, viverra sed est ut, finibus interdum velit. Nullam vehicula tincidunt orci sit amet pretium. Praesent vel pharetra quam.",
+                  SizedBox(height: 16),
+                  Text(
+                    '${description}',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white70,
