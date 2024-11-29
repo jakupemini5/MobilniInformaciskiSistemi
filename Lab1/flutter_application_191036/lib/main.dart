@@ -4,6 +4,59 @@ void main() {
   runApp(const MyApp());
 }
 
+class ClothingItemCard extends StatelessWidget {
+  final int price;
+  final String name;
+  final String imageUrl;
+
+  const ClothingItemCard({
+    super.key,
+    required this.price,
+    required this.name,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey.shade400, // Adjust as needed
+      elevation: 12,
+      shadowColor: Colors.blue,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Display image
+            Expanded(
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.error, size: 50, color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 8),
+            // Display name
+            Text(
+              name,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            // Display price
+            Text(
+              "\$${price.toString()}",
+              style: const TextStyle(fontSize: 14, color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -11,7 +64,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Jakup Emini 191036',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,10 +81,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor:  const Color.fromARGB(255, 0, 167, 251)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: '191036'),
     );
   }
 }
@@ -80,40 +133,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // change color while the other colors stay the same.s
+        backgroundColor: Colors.grey.shade900,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title, style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body:   GridView.count(
+        crossAxisCount: 2,
+        children: const <Widget>[
+          ClothingItemCard(price: 10, name: 'hello world', imageUrl: 'https://picsum.photos/seed/123/400/300',),
+          ClothingItemCard(price: 10, name: 'hello world', imageUrl: 'https://picsum.photos/seed/456/400/300',),
+          ClothingItemCard(price: 10, name: 'hello world', imageUrl: 'https://picsum.photos/seed/789/400/300',)
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
