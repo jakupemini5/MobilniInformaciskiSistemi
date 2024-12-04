@@ -1,5 +1,8 @@
 # jokes_app
 
+![image](https://github.com/user-attachments/assets/5c9bb23a-d7f3-40b3-bc20-d74b461e8465)
+
+
 A new Flutter project.
 
 ## Getting Started
