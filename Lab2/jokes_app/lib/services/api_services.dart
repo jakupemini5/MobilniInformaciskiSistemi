@@ -38,4 +38,19 @@ class ApiService {
       throw Exception('Error: $e');
     }
   }
+
+  Future<JokeModel> GetRandomJokeOfTheDay() async {
+    final url = Uri.parse('$baseUrl/random_joke');
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final dynamic jsonData = json.decode(response.body);
+        return JokeModel.fromJson(jsonData);
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
 }

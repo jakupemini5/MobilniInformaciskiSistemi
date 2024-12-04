@@ -18,7 +18,6 @@ class JokesWithTypeScreenState extends State<JokesWithTypeScreen> {
   late ApiService apiService;
   List<JokeModel> jokes = [];
 
-
   @override
   void initState() {
     super.initState();
@@ -29,32 +28,31 @@ class JokesWithTypeScreenState extends State<JokesWithTypeScreen> {
 
   Future<void> fetchJokes() async {
     final data = await apiService.getJokesWithType(type);
-      setState(() {
-        jokes = data;
-      });
+    setState(() {
+      jokes = data;
+    });
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.black,
-    appBar: BlurredAppBar(
-      title: type,
-    ),
-    body: jokes.isEmpty
-        ? const Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: jokes.length,
-            itemBuilder: (context, index) {
-              return JokeCard(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: BlurredAppBar(
+        title: type,
+      ),
+      body: jokes.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: jokes.length,
+              itemBuilder: (context, index) {
+                return JokeCard(
                   type: jokes[index].type,
                   id: jokes[index].id,
                   setup: jokes[index].setup,
                   punchline: jokes[index].punchline,
                 );
-            },
-          ),
-  );
-}
-
+              },
+            ),
+    );
+  }
 }
