@@ -17,7 +17,7 @@ class LocalStorageService {
   }
 
   // Retrieve a list of JSON data
-  Future<List<JokeModel>> GetFavoriteJokes(String key) async {
+  Future<List<JokeModel>> getFavoriteJokes(String key) async {
     final prefs = await SharedPreferences.getInstance();
     String? jsonString = prefs.getString(key);
     if (jsonString != null) {

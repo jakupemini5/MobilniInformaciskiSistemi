@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:jokes_app/screens/favorite_jokes_screen.dart';
 import 'package:jokes_app/screens/joke_of_the_day_screen.dart';
 
 class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,6 +29,20 @@ class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           actions: [
             IconButton(
+              icon: const Icon(Icons.star, color: Colors.white),
+              iconSize: 40,
+              tooltip: 'Favorite Jokes',
+              onPressed: () {
+                // Navigate to RandomJokeOfTheDayScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoriteJokesScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
               icon: const Icon(Icons.casino, color: Colors.white),
               iconSize: 40,
               tooltip: 'Random Joke of the Day',
@@ -41,6 +56,7 @@ class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
                 );
               },
             ),
+            
           ],
         ),
       ),

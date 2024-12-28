@@ -23,7 +23,7 @@ class JokeOfTheDayScreenState extends State<JokeOfTheDayScreen> {
   }
 
   Future<void> fetchJokes() async {
-    final data = await apiService.GetRandomJokeOfTheDay();
+    final data = await apiService.getRandomJokeOfTheDay();
       setState(() {
         joke = data;
       });

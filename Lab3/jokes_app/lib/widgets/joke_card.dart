@@ -35,7 +35,7 @@ class _JokeCardState extends State<JokeCard> {
   Future<void> _checkIfFavorite() async {
     if (widget.id == null) return;
     try {
-      final data = await localStorageService.GetFavoriteJokes("favoriteJokes");
+      final data = await localStorageService.getFavoriteJokes("favoriteJokes");
       final isFavoriteJoke = data.any((x) => x.id == widget.id);
       setState(() {
         isFavorite = isFavoriteJoke;
@@ -49,14 +49,14 @@ class _JokeCardState extends State<JokeCard> {
     }
   }
 
-  Future<void> AddFavorite() async {
+  Future<void> addFavorite() async {
     if (widget.id == null) return;
     try {
       setState(() {
         isFavorite = !isFavorite;
       });
       // Fetch existing favorite jokes
-      final data = await localStorageService.GetFavoriteJokes("favoriteJokes");
+      final data = await localStorageService.getFavoriteJokes("favoriteJokes");
 
       // Check if the joke already exists
       bool foundJoke = data.any((joke) => joke.id == widget.id);
@@ -145,7 +145,7 @@ class _JokeCardState extends State<JokeCard> {
                     iconSize: 40,
                     tooltip: 'Make favorite',
                     onPressed: () async {
-                      AddFavorite();
+                      addFavorite();
                     },
                   ),
               ],

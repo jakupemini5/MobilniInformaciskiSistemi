@@ -39,7 +39,7 @@ class ApiService {
     }
   }
 
-  Future<JokeModel> GetRandomJokeOfTheDay() async {
+  Future<JokeModel> getRandomJokeOfTheDay() async {
     final url = Uri.parse('$baseUrl/random_joke');
     try {
       final response = await http.get(url);
