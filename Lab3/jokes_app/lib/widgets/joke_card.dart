@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/models/joke_model.dart';
 import 'package:jokes_app/services/local_storage_service.dart';
 
 class JokeCard extends StatefulWidget {
@@ -48,6 +49,51 @@ class _JokeCardState extends State<JokeCard> {
     }
   }
 
+  Future<void> AddFavorite() async {
+    if (widget.id == null) return;
+    try {
+      setState(() {
+        isFavorite = !isFavorite;
+      });
+      // Fetch existing favorite jokes
+      final data = await localStorageService.GetFavoriteJokes("favoriteJokes");
+
+      // Check if the joke already exists
+      bool foundJoke = data.any((joke) => joke.id == widget.id);
+
+      if (isFavorite) {
+        if (!foundJoke) {
+          // Create a new JokeModel with widget details
+          JokeModel newJoke = JokeModel(
+            id: widget.id!,
+            type: widget.type ?? '',
+            setup: widget.setup ?? '',
+            punchline: widget.punchline ?? '',
+          );
+
+          // Add the new joke to the list
+          data.add(newJoke);
+
+          // Save the updated list to local storage
+          await localStorageService.saveJsonList("favoriteJokes", data);
+        }
+      }
+      else {
+        var foundJokeModel = data.where((x) => x.id == widget.id);
+        data.remove(foundJokeModel.first);
+        await localStorageService.saveJsonList("favoriteJokes", data);
+      }
+
+      // Update UI state
+    } catch (e) {
+      debugPrint('Error adding favorite joke: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -84,24 +130,26 @@ class _JokeCardState extends State<JokeCard> {
               ),
             ),
             const SizedBox(height: 10),
-            if (isLoading)
-              const CircularProgressIndicator(color: Colors.white)
-            else
-              IconButton(
-                icon: Icon(
-                  isFavorite ? Icons.star : Icons.star_outline,
-                  color: Colors.white,
-                ),
-                iconSize: 40,
-                tooltip: 'Make favorite',
-                onPressed: () async {
-                  // Add functionality to toggle the favorite state
-                  setState(() {
-                    isFavorite = !isFavorite;
-                  });
-                  // Update local storage here if necessary
-                },
-              ),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.end, // Aligns the content to the right
+              children: [
+                if (isLoading)
+                  const CircularProgressIndicator(color: Colors.white)
+                else
+                  IconButton(
+                    icon: Icon(
+                      isFavorite ? Icons.star : Icons.star_outline,
+                      color: Colors.white,
+                    ),
+                    iconSize: 40,
+                    tooltip: 'Make favorite',
+                    onPressed: () async {
+                      AddFavorite();
+                    },
+                  ),
+              ],
+            ),
           ],
         ),
       ),

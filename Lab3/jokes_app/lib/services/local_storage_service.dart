@@ -10,7 +10,7 @@ class LocalStorageService {
 
   LocalStorageService._internal();
 
-  Future<void> saveJsonList(String key, List<Map<String, dynamic>> jsonList) async {
+  Future<void> saveJsonList(String key, List<JokeModel> jsonList) async {
     final prefs = await SharedPreferences.getInstance();
     String jsonString = jsonEncode(jsonList);
     await prefs.setString(key, jsonString);
