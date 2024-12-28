@@ -5,7 +5,7 @@ import 'package:jokes_app/widgets/blurred_app_bar.dart';
 import 'package:jokes_app/widgets/joke_card.dart';
 
 class JokeOfTheDayScreen extends StatefulWidget {
-  JokeOfTheDayScreen({super.key});
+  const JokeOfTheDayScreen({super.key});
 
   @override
   State<JokeOfTheDayScreen> createState() => JokeOfTheDayScreenState();
@@ -33,7 +33,7 @@ class JokeOfTheDayScreenState extends State<JokeOfTheDayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: BlurredAppBar(
+      appBar: const BlurredAppBar(
         title: "Joke of the day",
       ),
       body: joke == null

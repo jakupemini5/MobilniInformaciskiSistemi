@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/services/local_storage_service.dart';
 
-class JokeCard extends StatelessWidget {
+class JokeCard extends StatefulWidget {
   final String? type;
   final String? setup;
   final String? punchline;
@@ -13,6 +14,39 @@ class JokeCard extends StatelessWidget {
     required this.punchline,
     required this.id,
   });
+
+  @override
+  State<JokeCard> createState() => _JokeCardState();
+}
+
+class _JokeCardState extends State<JokeCard> {
+  late LocalStorageService localStorageService;
+  bool isFavorite = false;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    localStorageService = LocalStorageService();
+    _checkIfFavorite();
+  }
+
+  Future<void> _checkIfFavorite() async {
+    if (widget.id == null) return;
+    try {
+      final data = await localStorageService.GetFavoriteJokes("favoriteJokes");
+      final isFavoriteJoke = data.any((x) => x.id == widget.id);
+      setState(() {
+        isFavorite = isFavoriteJoke;
+      });
+    } catch (e) {
+      debugPrint('Error checking favorite joke: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +64,7 @@ class JokeCard extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             Text(
-              setup ?? '',
+              widget.setup ?? '',
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.white70,
@@ -41,7 +75,7 @@ class JokeCard extends StatelessWidget {
             Divider(color: Colors.blueGrey.shade300),
             const SizedBox(height: 10),
             Text(
-              punchline ?? '',
+              widget.punchline ?? '',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
@@ -49,6 +83,25 @@ class JokeCard extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
+            const SizedBox(height: 10),
+            if (isLoading)
+              const CircularProgressIndicator(color: Colors.white)
+            else
+              IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.star : Icons.star_outline,
+                  color: Colors.white,
+                ),
+                iconSize: 40,
+                tooltip: 'Make favorite',
+                onPressed: () async {
+                  // Add functionality to toggle the favorite state
+                  setState(() {
+                    isFavorite = !isFavorite;
+                  });
+                  // Update local storage here if necessary
+                },
+              ),
           ],
         ),
       ),

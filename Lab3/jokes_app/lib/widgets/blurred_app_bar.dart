@@ -36,7 +36,7 @@ class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => JokeOfTheDayScreen(),
+                    builder: (context) => const JokeOfTheDayScreen(),
                   ),
                 );
               },
