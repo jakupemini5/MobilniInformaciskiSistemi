@@ -1,16 +1,14 @@
 # jokes_app
 
-A new Flutter project.
+Added firebase scheduled notifications to be sent everyday at 1pm
+![image](https://github.com/user-attachments/assets/d7c0ef98-5594-4640-9479-a636064ec17a)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+The buttons on the following screenshot offer the following functionality:
+1. Send Test notification
+2. Schedule send notifications every 10 seconds
+3. List all favorite jokes
+4. Get random joke of the day
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://github.com/user-attachments/assets/5fbeaaf8-cd9a-4955-a056-7fbba365a5e5)
