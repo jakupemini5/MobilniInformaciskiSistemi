@@ -33,7 +33,7 @@ class FavoriteJokesScreenState extends State<FavoriteJokesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: const BlurredAppBar(
+      appBar: BlurredAppBar(
         title: 'Favorite jokes',
       ),
       body: jokes.isEmpty

@@ -2,11 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:jokes_app/screens/favorite_jokes_screen.dart';
 import 'package:jokes_app/screens/joke_of_the_day_screen.dart';
+import 'package:jokes_app/services/notification_service.dart';
 
 class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final NotificationService notificationService = NotificationService();
 
-  const BlurredAppBar({
+
+  BlurredAppBar({
     super.key,
     required this.title,
   });
@@ -28,6 +31,22 @@ class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.notifications_active, color: Colors.white),
+              iconSize: 40,
+              tooltip: 'Random Joke of the Day',
+              onPressed: () {
+                notificationService.showTestNotification();
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.schedule, color: Colors.white),
+              iconSize: 40,
+              tooltip: 'Random Joke of the Day',
+              onPressed: () {
+                notificationService.scheduleTestNotifications();
+              },
+            ),
             IconButton(
               icon: const Icon(Icons.star, color: Colors.white),
               iconSize: 40,
@@ -56,7 +75,6 @@ class BlurredAppBar extends StatelessWidget implements PreferredSizeWidget {
                 );
               },
             ),
-            
           ],
         ),
       ),

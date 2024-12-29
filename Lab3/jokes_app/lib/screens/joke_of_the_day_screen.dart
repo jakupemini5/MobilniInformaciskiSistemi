@@ -33,7 +33,7 @@ class JokeOfTheDayScreenState extends State<JokeOfTheDayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: const BlurredAppBar(
+      appBar: BlurredAppBar(
         title: "Joke of the day",
       ),
       body: joke == null

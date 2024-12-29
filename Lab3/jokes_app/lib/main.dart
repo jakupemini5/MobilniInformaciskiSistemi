@@ -11,12 +11,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  
   final notificationService = NotificationService();
-  notificationService.initialize();
+  await notificationService.initialize();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    notificationService.showNotification(message);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    final apiService = ApiService();
+    var jokeOfTheDay = await apiService.getRandomJokeOfTheDay();
+    notificationService.showNotification(message, "Joke of the day!", jokeOfTheDay.setup ?? "Open to see");
   });
 
 

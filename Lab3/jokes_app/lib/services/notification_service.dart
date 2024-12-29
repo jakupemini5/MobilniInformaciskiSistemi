@@ -6,10 +6,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class NotificationService {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   Timer? _timer;
 
-  void initialize() {
+  Future<void> initialize() async {
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     const InitializationSettings initializationSettings =
@@ -21,6 +22,30 @@ class NotificationService {
         ?.requestNotificationsPermission();
 
     _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    NotificationSettings settings =
+        await _firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User denied permission');
+    }
+
+    // Retrieve the FCM token
+    String? token = await _firebaseMessaging.getToken();
+    if (token != null) {
+      print('FCM Token: $token');
+      // Save or send the token to your backend
+    } else {
+      print('Failed to retrieve FCM token');
+    }
   }
 
   void showTestNotification() {
@@ -43,7 +68,7 @@ class NotificationService {
     );
   }
 
-  void showNotification(RemoteMessage message) {
+  void showNotification(RemoteMessage message, String title, String body) {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'joke_channel',
@@ -57,8 +82,8 @@ class NotificationService {
 
     _flutterLocalNotificationsPlugin.show(
       message.hashCode,
-      message.notification?.title,
-      message.notification?.body,
+      title,
+      body,
       notificationDetails,
     );
   }
