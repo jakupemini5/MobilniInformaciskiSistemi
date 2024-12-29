@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/models/joke_model.dart';
 import 'package:jokes_app/services/local_storage_service.dart';
+import 'package:jokes_app/services/notification_service.dart';
 
 class JokeCard extends StatefulWidget {
   final String? type;
@@ -22,6 +23,7 @@ class JokeCard extends StatefulWidget {
 
 class _JokeCardState extends State<JokeCard> {
   late LocalStorageService localStorageService;
+  late NotificationService notificationService;
   bool isFavorite = false;
   bool isLoading = false;
 
@@ -29,6 +31,7 @@ class _JokeCardState extends State<JokeCard> {
   void initState() {
     super.initState();
     localStorageService = LocalStorageService();
+    notificationService = NotificationService();
     _checkIfFavorite();
   }
 
@@ -130,6 +133,12 @@ class _JokeCardState extends State<JokeCard> {
               ),
             ),
             const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                notificationService.showTestNotification();
+              },
+              child: Text('Send Test Notification'),
+            ),
             Row(
               mainAxisAlignment:
                   MainAxisAlignment.end, // Aligns the content to the right

@@ -1,11 +1,30 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:jokes_app/models/joke_type_model.dart';
 import 'package:jokes_app/services/api_services.dart';
 import 'package:jokes_app/widgets/blurred_app_bar.dart';
 import 'package:jokes_app/widgets/joke_type_card.dart';
+import 'package:jokes_app/services/notification_service.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  final notificationService = NotificationService();
+  notificationService.initialize();
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    notificationService.showNotification(message);
+  });
+
+
+  runApp(MyApp());
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('Handling a background message ${message.messageId}');
 }
 
 class MyApp extends StatelessWidget {
