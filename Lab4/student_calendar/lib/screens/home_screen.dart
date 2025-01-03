@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_calendar/models/ExamModel.dart';
+import 'package:student_calendar/screens/google_map_screen.dart';
 import 'package:student_calendar/widgets/exam_card.dart';
 import 'package:student_calendar/widgets/my_app_bar.dart';
 
@@ -179,16 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ) :
-      Container(
-        child: const Text(
-                      "Hello world",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-      )
+      MapSample()
     );
   }
 }
