@@ -71,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<ExamModel> data = rawData.map((item) => ExamModel.fromJson(item)).toList();
 
     setState(() {
+      exams = data;
       filteredExams = data;
       todaysExam = filteredExams
       .where((exam) =>
