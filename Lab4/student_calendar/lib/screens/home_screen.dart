@@ -25,7 +25,7 @@ var exams = [
       name: "Advanced web programming January",
       examName: "Advanced web programming January",
       date: DateTime.utc(2024, 12, 27))
-].;
+];
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required this.title});
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _clearFilter() {
     setState(() {
       selectedDate = null;
-      filteredExams = exams; // Reset to the original list
+      filteredExams = exams;
     });
   }
 
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: currentPageIndex == 0 ? Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -178,7 +178,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
+      ) :
+      Container(
+        child: const Text(
+                      "Hello world",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white70,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+      )
     );
   }
 }

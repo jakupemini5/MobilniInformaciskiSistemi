@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.student_calendar"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "25.1.8937393"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,6 +36,12 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
+    }
+
+    dependencies {
+        implementation 'com.google.android.gms:play-services-maps:17.0.1'  // Google Maps SDK
+        implementation 'com.google.android.gms:play-services-location:17.0.0'  // Location services
+        implementation 'com.google.firebase:firebase-messaging:23.1.0' // Firebase Cloud Messaging
     }
 }
 
