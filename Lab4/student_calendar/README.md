@@ -1,16 +1,11 @@
 # student_calendar
 
-A new Flutter project.
+Student Calendar app
 
-## Getting Started
+All exams can be filtered by date, with todays exams shown at the top
 
-This project is a starting point for a Flutter application.
+On the map screen you can see the location of all exams and click to get the route from your current location
 
-A few resources to get you started if this is your first Flutter project:
+![Screenshot_20250103-214906](https://github.com/user-attachments/assets/46923cc9-91d8-4dbd-9800-6d2ef3237651)
+![Screenshot_20250103-214926](https://github.com/user-attachments/assets/d7f15cf9-1356-4daf-9d4a-1773b0a19271)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
