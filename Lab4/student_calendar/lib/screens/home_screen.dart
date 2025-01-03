@@ -3,30 +3,9 @@ import 'package:student_calendar/models/ExamModel.dart';
 import 'package:student_calendar/screens/google_map_screen.dart';
 import 'package:student_calendar/widgets/exam_card.dart';
 import 'package:student_calendar/widgets/my_app_bar.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
-var exams = [
-  ExamModel(
-      name: "Math June Exam",
-      examName: "Math",
-      date: DateTime.utc(2024, 12, 25),
-      id: 1),
-  ExamModel(
-      name: "Calculus June Exam",
-      examName: "Calculus",
-      date: DateTime.utc(2024, 12, 26)),
-  ExamModel(
-      name: "Structural programming",
-      examName: "Structural programming",
-      date: DateTime.utc(2025, 1, 1)),
-  ExamModel(
-      name: "Advanced programming June",
-      examName: "Advanced programming",
-      date: DateTime.utc(2024, 12, 27)),
-  ExamModel(
-      name: "Advanced web programming January",
-      examName: "Advanced web programming January",
-      date: DateTime.utc(2024, 12, 27))
-];
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key, required this.title});
@@ -40,13 +19,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
   DateTime? selectedDate;
-  List<ExamModel> filteredExams = exams;
-  ExamModel? todaysExam = exams
-      .where((exam) =>
-          exam.date!.year == DateTime.now().year &&
-          exam.date!.month == DateTime.now().month &&
-          exam.date!.day == DateTime.now().day)
-      .firstOrNull;
+  List<ExamModel> exams = [];
+  List<ExamModel> filteredExams = [];
+  ExamModel? todaysExam;
+  
+  @override
+  void initState() {
+    super.initState();
+    _loadExamItems();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -80,6 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       selectedDate = null;
       filteredExams = exams;
+    });
+  }
+
+  Future<void> _loadExamItems() async {
+    // Load the JSON file
+    final String response = await rootBundle.loadString('assets/examsList.json');
+    final List<dynamic> rawData = json.decode(response);
+    final List<ExamModel> data = rawData.map((item) => ExamModel.fromJson(item)).toList();
+
+    setState(() {
+      filteredExams = data;
+      todaysExam = filteredExams
+      .where((exam) =>
+          exam.date!.year == DateTime.now().year &&
+          exam.date!.month == DateTime.now().month &&
+          exam.date!.day == DateTime.now().day)
+      .firstOrNull;
     });
   }
 

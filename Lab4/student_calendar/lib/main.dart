@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_calendar/screens/google_map_screen.dart';
 import 'package:student_calendar/screens/home_screen.dart';
 
 void main() {

@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:student_calendar/models/ExamModel.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapSample extends StatefulWidget {
   const MapSample({super.key});
@@ -12,41 +15,75 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(42.0039355, 21.4082081),
-    zoom: 16.4746,
-  );
-
+  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+  List<ExamModel> exams = [];
+  CameraPosition? _initialPosition; // Dynamic initial position
   final Set<Marker> _markers = {};
   final Set<Polyline> _polylines = {};
   final String _apiKey = 'AIzaSyC_0Paii4Ahpgx6CFpvbEFru-Dl8X8ax14';
 
-  final List<LatLng> _pointsOfInterest = [
-    LatLng(42.0045, 21.4087), // Example Point 1
-    LatLng(42.0030, 21.4075), // Example Point 2
-  ];
-
   @override
   void initState() {
     super.initState();
+    _initializeMap();
     _initializeMarkers();
   }
 
-  void _initializeMarkers() {
-    for (int i = 0; i < _pointsOfInterest.length; i++) {
+  Future<void> _initializeMap() async {
+    // Request location permissions
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // Fetch the current location
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      _initialPosition = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 16.4746,
+      );
+    });
+  }
+
+  Future<void> _loadExamItems() async {
+    final String response = await rootBundle.loadString('assets/examsList.json');
+    final List<dynamic> rawData = json.decode(response);
+    final List<ExamModel> data = rawData.map((item) => ExamModel.fromJson(item)).toList();
+
+    setState(() {
+      exams = data;
+    });
+  }
+
+  void _initializeMarkers() async {
+    await _loadExamItems();
+    for (int i = 0; i < exams.length; i++) {
       _markers.add(
         Marker(
           markerId: MarkerId('poi_$i'),
-          position: _pointsOfInterest[i],
+          position: LatLng(exams[i].latitude!, exams[i].longitude!),
           infoWindow: InfoWindow(
-            title: 'Point of Interest $i',
-            snippet: 'Tap for directions',
+            title: exams[i].name,
+            snippet: 'Click here to get Route',
           ),
-          onTap: () {
-            _getRoute(_pointsOfInterest[i]);
+          onTap: () async {
+            await _getRoute(LatLng(exams[i].latitude!, exams[i].longitude!));
           },
         ),
       );
@@ -54,8 +91,10 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _getRoute(LatLng destination) async {
+    if (_initialPosition == null) return;
+
     final String url =
-        'https://maps.googleapis.com/maps/api/directions/json?origin=${_kGooglePlex.target.latitude},${_kGooglePlex.target.longitude}&destination=${destination.latitude},${destination.longitude}&key=$_apiKey';
+        'https://maps.googleapis.com/maps/api/directions/json?origin=${_initialPosition!.target.latitude},${_initialPosition!.target.longitude}&destination=${destination.latitude},${destination.longitude}&key=$_apiKey';
 
     final response = await http.get(Uri.parse(url));
 
@@ -118,14 +157,16 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        markers: _markers,
-        polylines: _polylines,
-      );
+    return _initialPosition == null
+        ? Center(child: CircularProgressIndicator())
+        : GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: _initialPosition!,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            markers: _markers,
+            polylines: _polylines,
+          );
   }
 }

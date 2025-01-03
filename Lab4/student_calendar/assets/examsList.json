@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Calculus January Exam",
+        "examName": "Calculus",
+        "date": "2025-01-03T14:28:25Z",
+        "latitude": 42.0045,
+        "longitude": 21.4087
+    },
+    {
+        "id": 2,
+        "name": "Programming January Exam",
+        "examName": "Programming",
+        "date": "2025-01-03T14:28:25Z",
+        "latitude": 42.0030,
+        "longitude": 21.4075
+    },
+    {
+        "id": 3,
+        "name": "Algorithm and data structures June Exam",
+        "examName": "Algorithm and data structures",
+        "date": "2025-06-02T14:28:25Z",
+        "latitude": 42.0050,
+        "longitude": 21.4080
+    },
+    {
+        "id": 4,
+        "name": "OS June Exam",
+        "examName": "Operating Systems",
+        "date": "2025-06-03T14:28:25Z",
+        "latitude": 42.0040,
+        "longitude": 21.4040
+    },
+    {
+        "id": 3,
+        "name": "MIS Exam on January",
+        "examName": "Mobile and information systems",
+        "date": "2025-01-03T14:28:25Z",
+        "latitude": 42.0030,
+        "longitude": 21.4000
+    }
+]
